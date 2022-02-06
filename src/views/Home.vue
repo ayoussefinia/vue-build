@@ -1,27 +1,33 @@
 <template>
-    <header class="top-bar spread">
-        <nav class="top-bar-nav">
-          <router-link> to="/" class="top-bar-link">
-            <i class="icofont-spoon-and-fork"></i>
-            <span>Home</span>
-          </router-link>
-          <router-link> to="/products" class="top-bar-link">
-            <span>Products</span>
-          </router-link>
-          <router-link> to="/past-orders" class="top-bar-link">
-            <span>Past Orders</span>
-          </router-link>
-        </nav>
-        <a @click="toggleSidebar" href="#" class="top-bar-cart-link">
-          <i class="icofont-cart-alt icofont-1x"></i>
-          <span>Cart ({{totalQuantity}})</span>
-        </a>
-      </header>
-  <router-view/>
+      <div class="splash-container">
+        <div class="splash">
+          <h1>Splendid Food</h1>
+        </div>
+      </div>
+
+      <main class="wrapper">
+        <h2>Recommended</h2>
+        <div class="recommended">
+          <ProductCard
+            v-for="(product, index) in inventory"
+            :key="product.id"
+            class="card"
+            :index="index"
+            :product="product"
+            :addToCart="addToCart"
+          >
+          </ProductCard>
+        </div>
+      </main>
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard'
 export default {
-  name: 'Home'
+  props: ['inventory', 'addToCart', 'total'],
+  name: 'Home',
+  components: {
+    ProductCard
+  }
 }
 </script>
